@@ -4,3 +4,5 @@ __pycache__
 *.jpg
 FPImage.py
 .DS_store
+*.mp4
+*.webm
