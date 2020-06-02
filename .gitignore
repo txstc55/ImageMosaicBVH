@@ -3,3 +3,4 @@
 __pycache__
 *.jpg
 FPImage.py
+.DS_store
