@@ -1,0 +1,5 @@
+*.json
+.vscode
+__pycache__
+*.jpg
+FPImage.py
