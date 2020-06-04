@@ -12,6 +12,14 @@ def return_np_block(np_block, tl, length, top_left):
     return np_block[relative_tl0:relative_tl0+length, relative_tl1:relative_tl1+length]
 
 
+# Normally the user should not call this class
+# giving a matrix in numpy
+# this method will subdivide the region whenever there is
+# an element that is greater or equal to 1
+# the entire block will than be multiplied by some factor
+# so that it will not divide untill the block size is 1
+# but user can also define the snallest block size
+# so that it stops at a certain point
 class SubDivTree:
     top_left_position = (0, 0)
     bot_right_position = (0, 0)
@@ -77,5 +85,4 @@ class SubDivTree:
                 else:
                     block_queue += block.sub_block
             return all_blocks
-
 
