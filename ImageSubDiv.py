@@ -109,7 +109,7 @@ class ImageSubDiv:
         picked_file_count = {}
         # how many times do we allow a picture to be repeatedly used
         repeated_count = int(
-            max([10, 10*len(self.needed_color_count)/len(self.color_info)]))
+            max([5, 5*len(self.needed_color_count)/len(self.color_info)]))
         count = 0
         for ind in index:
             color = self.block_colors[ind]  # get the color
