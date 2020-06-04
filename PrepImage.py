@@ -36,6 +36,7 @@ class PrepImage:
     width = 0
     height = 0
 
+    # take in an image file and just checking if it is valid
     def __init__(self, file_name):
         # check if it is an image file by just looking at the extension
         if (file_name.lower().endswith(('.png', '.jpg', '.jpeg', '.tiff', '.bmp'))):
@@ -43,6 +44,11 @@ class PrepImage:
         else:
             return
 
+    # taking in a picture, resizing it to the desired size
+    # the process will convert the color profile is necessary
+    # it will also resize the picture itself to a smaller value
+    # only the middle part is useful for us so picture will be cropped
+    # no picture will be saved unless otherwise specified
     def PreProcess(self, debug=False, save_path=None, desired_size=0):
         if (self.file_name == ""):
             return  # just incase there is no protect against invalid files
@@ -110,6 +116,8 @@ class PrepImage:
             im.save(save_path)
 
     # we will continue to use rgb
+    # this will return an rgb color if successful
+    # otherwise -1 -1 -1
     def GetColor(self):
         colors = self.image.getcolors(self.width*self.height)
         r = 0
