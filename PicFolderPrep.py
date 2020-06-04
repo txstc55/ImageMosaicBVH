@@ -22,6 +22,8 @@ class PicFolderPrep:
     file_list = []
     rgb_info = {}
 
+    # User should never call this method directly
+    # this is a function definition for each thread's work
     def ProcessorWork(self, start_index, end_index, process_id, return_dict):
         start_time = time.time()
         # slice up the work
@@ -42,6 +44,8 @@ class PicFolderPrep:
         print("process %d finished --- %s seconds ---" %
               (process_id, time.time() - start_time))
 
+    # input, the folder name
+    # this will generate a list of files ready to be processed
     def __init__(self, folder_name):
         self.folder_name = folder_name
         file_list = []
@@ -52,6 +56,9 @@ class PicFolderPrep:
                     file_list.append(file_abs_path)
         self.file_list = file_list
 
+    # get the average rgb color of a photo for each file in the list
+    # it will dump a json file, which the name will be user defined
+    # since the process can be fairly slow, this is done using multi threading
     def GetColorList(self, info_name="color_info.json"):
         cpu_counts = cpu_count()
         print("Start work on %d process" % (cpu_counts))
