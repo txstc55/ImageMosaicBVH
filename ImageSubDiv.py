@@ -16,6 +16,7 @@ from PrepImage import PrepImage
 # at the beginning, user can also choose to enlarge the picture so that
 # each square has larger pixel countsÎ
 
+
 class ImageSubDiv:
     file_name = ""
     im = None
@@ -48,9 +49,13 @@ class ImageSubDiv:
                     new_pic_file_name))
                 im.save(new_pic_file_name)
                 self.file_name = new_pic_file_name
-            self.im = cv2.imread(self.file_name)
+                im = cv2.imread(self.file_name)
+            else:
+                im = np.asarray(im)
+            self.im = im
             # because they are bgr initially
-            self.im = cv2.cvtColor(self.im, cv2.COLOR_BGR2RGB)
+            if if_converted:
+                self.im = cv2.cvtColor(self.im, cv2.COLOR_BGR2RGB)
             self.all_blocks = []
             self.block_colors = []
             self.block_pic = []
@@ -61,11 +66,11 @@ class ImageSubDiv:
     # input, the largest and smallest block size
     # this method subdivides the picture based on gradient value
     # the gradient value represents color change internsity in the picture
-    # the incentive is that you will want more blocks at the place where 
+    # the incentive is that you will want more blocks at the place where
     # color changes more drastically
     # and less blocks where the color stays constant
     def SubDiv(self, largest_block_size=50, smallest_block_size=1):
-        gray = cv2.cvtColor(self.im, cv2.COLOR_BGR2GRAY)  # the gray values
+        gray = cv2.cvtColor(self.im, cv2.COLOR_RGB2GRAY)  # the gray values
         blur = cv2.blur(gray, (5, 5))  # the blurred pic, in gray
 
         gradient = cv2.Laplacian(blur, cv2.CV_64F)  # the gradient map
@@ -79,6 +84,7 @@ class ImageSubDiv:
         width_block = int(width/largest_block_size)
         self.width = width
         self.height = height
+        print("Width %d, height %d" % (width, height))
 
         for i in range(height_block):
             for j in range(width_block):
@@ -193,8 +199,8 @@ class ImageSubDiv:
         new_image.save("test_out.jpg")
 
 
-# test = ImageSubDiv("corgi.jpg", enlarge=2)
-# test.SubDiv(largest_block_size=500, smallest_block_size=1)
+# test = ImageSubDiv("test.jpg", enlarge=10)
+# test.SubDiv(largest_block_size=100, smallest_block_size=1)
 # test.ReadColorInfo()
 # test.ProcessColors()
 # test.PastePics()
