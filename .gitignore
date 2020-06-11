@@ -7,3 +7,5 @@ FPImage.py
 *.mp4
 *.webm
 outframes
+out_frames
+*.mkv
