@@ -2,6 +2,7 @@
 .vscode
 __pycache__
 *.jpg
+*.jpeg
 FPImage.py
 .DS_store
 *.mp4
