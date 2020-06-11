@@ -1,11 +1,16 @@
 import cv2
 import os
+import ntpath
 
 
 def DebugPrint(debug, message):
     if debug:
         print(message)
 
+## get file base name
+def path_leaf(path):
+    head, tail = ntpath.split(path)
+    return tail or ntpath.basename(head)
 
 class PrepVideo:
     file_name = ""  # the image file name
@@ -32,21 +37,23 @@ class PrepVideo:
     def SaveFrames(self, folder_name="out_frames", skip = 1):
         count = 0
         success, image = self.video.read()
-        file_name_base = "".join(self.file_name.split(".")[:-1])
+        file_name_base = "".join(path_leaf(self.file_name).split(".")[:-1])
         if (not os.path.isdir(folder_name)):
             os.mkdir(folder_name)
         while success:
             if (count%skip == 0):
                 cv2.imwrite("."+os.sep+folder_name+os.sep+file_name_base +
                             "_frame_"+str(count)+".jpg", image)
+                # print("."+os.sep+folder_name+os.sep+file_name_base +
+                #             "_frame_"+str(count)+".jpg")
             success, image = self.video.read()
             count += 1
-            if (count%100 == 0):
-                print("%d/%d frames passed"%(count, self.length))
-        print("%d/%d frames passed"%(self.length, self.length))
+            # if (count%100 == 0):
+            #     print("%d/%d frames passed"%(count, self.length))
+        print("%d/%d frames processed for %s"%(self.length, self.length, self.file_name))
 
     # we will continue to use rgb
 
 
-# test = PrepVideo("test.webm")
+# test = PrepVideo("test_video_folder/test.webm")
 # test.SaveFrames(skip = 15)
