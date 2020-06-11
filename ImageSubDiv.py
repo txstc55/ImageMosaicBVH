@@ -69,7 +69,7 @@ class ImageSubDiv:
     # the incentive is that you will want more blocks at the place where
     # color changes more drastically
     # and less blocks where the color stays constant
-    def SubDiv(self, largest_block_size=50, smallest_block_size=1):
+    def SubDiv(self, largest_block_size=50, smallest_block_size=1, alpha = 0.6):
         gray = cv2.cvtColor(self.im, cv2.COLOR_RGB2GRAY)  # the gray values
         blur = cv2.blur(gray, (5, 5))  # the blurred pic, in gray
 
@@ -89,7 +89,7 @@ class ImageSubDiv:
         for i in range(height_block):
             for j in range(width_block):
                 sdtree = SubDivTree((i*largest_block_size, j*largest_block_size),
-                                    ((i+1)*largest_block_size, (j+1)*largest_block_size), smallest_block_size, gradient[i*largest_block_size:(i+1)*largest_block_size, j*largest_block_size:(j+1)*largest_block_size])
+                                    ((i+1)*largest_block_size, (j+1)*largest_block_size), smallest_block_size, gradient[i*largest_block_size:(i+1)*largest_block_size, j*largest_block_size:(j+1)*largest_block_size], alpha = alpha)
                 self.all_blocks += sdtree.ExtractBlock()
         # get all the color needed for this image
         for block in self.all_blocks:
@@ -167,7 +167,7 @@ class ImageSubDiv:
         print("Picture picking done")
 
     # finally paste the pictures
-    def PastePics(self):
+    def PastePics(self, out_file = "test_out.jpg"):
         index = list(range(len(self.block_colors)))
         # shuffle the index so that we access blocks randomly
         random.shuffle(index)
@@ -196,12 +196,11 @@ class ImageSubDiv:
             if (count % 1000 == 0):
                 print("Picture pasting progress : %d/%d" % (count, len(index)))
         print("Picture pasting done")
-        new_image.save("test_out.jpg")
+        new_image.save(out_file)
 
 
-# test = ImageSubDiv("test.jpg", enlarge=10)
-# test.SubDiv(largest_block_size=100, smallest_block_size=1)
-# test.ReadColorInfo()
+# test = ImageSubDiv("test.jpeg", enlarge=5)
+# test.SubDiv(largest_block_size=400, smallest_block_size=1, alpha = 0.8)
+# test.ReadColorInfo(file_name = "test.json")
 # test.ProcessColors()
-# test.PastePics()
-# print(test.im.shape)
+# test.PastePics(out_file = "testt.jpg")

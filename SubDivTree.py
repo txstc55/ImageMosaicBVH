@@ -29,7 +29,7 @@ class SubDivTree:
     # where is this segmentation of image at
     # how much do we divide for each iteration of subdivision
 
-    def __init__(self, top_left_position, bot_right_position, smallest_block_size, np_block):
+    def __init__(self, top_left_position, bot_right_position, smallest_block_size, np_block, alpha = 0.6):
         self.top_left_position = top_left_position
         self.bot_right_position = bot_right_position
         square_width = np_block.shape[0]  # how large is this block
@@ -39,7 +39,7 @@ class SubDivTree:
         # do a subdivision if there is a gradient value inside the block
         if (np_block.max() >= 1 and np_block.shape[0] >= 2 * smallest_block_size):
             # print(np_block)
-            np_block *= 0.6
+            np_block *= alpha
             # top left, the top left position of square 1
             tl = top_left_position
             # top middle, the top left position of square 2
