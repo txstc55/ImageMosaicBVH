@@ -69,15 +69,28 @@ class ImageSubDiv:
     # the incentive is that you will want more blocks at the place where
     # color changes more drastically
     # and less blocks where the color stays constant
-    def SubDiv(self, largest_block_size=50, smallest_block_size=1, alpha = 0.6):
-        gray = cv2.cvtColor(self.im, cv2.COLOR_RGB2GRAY)  # the gray values
-        blur = cv2.blur(gray, (5, 5))  # the blurred pic, in gray
+    def SubDiv(self, largest_block_size=50, smallest_block_size=1, alpha=0.6, use_gray_gradient=True):
+        gradient = None
+        if (use_gray_gradient):
+            gray = cv2.cvtColor(self.im, cv2.COLOR_RGB2GRAY)  # the gray values
+            blur = cv2.blur(gray, (5, 5))  # the blurred pic, in gray
+            gradient = cv2.Laplacian(blur, cv2.CV_64F)  # the gradient map
+            gradient = cv2.blur(gradient, (5, 5))  # the blurred pic, in gray
+        else:
+            input_r = self.im[:, :, 0]
+            input_g = self.im[:, :, 1]
+            input_b = self.im[:, :, 2]
+            blur_r = cv2.blur(input_r, (5, 5))
+            blur_g = cv2.blur(input_g, (5, 5))
+            blur_b = cv2.blur(input_b, (5, 5))
+            gradient_r = cv2.Laplacian(blur_r, cv2.CV_64F)  # the gradient map for r channel
+            gradient_g = cv2.Laplacian(blur_g, cv2.CV_64F)  # the gradient map for g channel
+            gradient_b = cv2.Laplacian(blur_b, cv2.CV_64F)  # the gradient map for b channel
+            gradient = gradient_r + gradient_g + gradient_b
+            gradient = cv2.blur(gradient, (5, 5))  
 
-        gradient = cv2.Laplacian(blur, cv2.CV_64F)  # the gradient map
-        gradient = cv2.blur(gradient, (5, 5))  # the blurred pic, in gray
-        # gradient /= 4
-        width = gray.shape[1]
-        height = gray.shape[0]
+        width = gradient.shape[1]
+        height = gradient.shape[0]
         width = width - width % largest_block_size  # because we don't want extras
         height = height - height % largest_block_size  # because we don't want extras
         height_block = int(height/largest_block_size)
@@ -89,7 +102,7 @@ class ImageSubDiv:
         for i in range(height_block):
             for j in range(width_block):
                 sdtree = SubDivTree((i*largest_block_size, j*largest_block_size),
-                                    ((i+1)*largest_block_size, (j+1)*largest_block_size), smallest_block_size, gradient[i*largest_block_size:(i+1)*largest_block_size, j*largest_block_size:(j+1)*largest_block_size], alpha = alpha)
+                                    ((i+1)*largest_block_size, (j+1)*largest_block_size), smallest_block_size, gradient[i*largest_block_size:(i+1)*largest_block_size, j*largest_block_size:(j+1)*largest_block_size], alpha=alpha)
                 self.all_blocks += sdtree.ExtractBlock()
         # get all the color needed for this image
         for block in self.all_blocks:
@@ -167,7 +180,7 @@ class ImageSubDiv:
         print("Picture picking done")
 
     # finally paste the pictures
-    def PastePics(self, out_file = "test_out.jpg"):
+    def PastePics(self, out_file="test_out.jpg"):
         index = list(range(len(self.block_colors)))
         # shuffle the index so that we access blocks randomly
         random.shuffle(index)
