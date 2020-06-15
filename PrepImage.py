@@ -39,7 +39,7 @@ class PrepImage:
     # take in an image file and just checking if it is valid
     def __init__(self, file_name):
         # check if it is an image file by just looking at the extension
-        if (file_name.lower().endswith(('.png', '.jpg', '.jpeg', '.tiff', '.bmp'))):
+        if (file_name.lower().endswith(('.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.heic'))):
             self.file_name = file_name
         else:
             return
