@@ -95,7 +95,3 @@ class PicFolderPrep:
         with open(info_name, 'w') as outfile:
             json.dump(self.rgb_info, outfile)
 
-
-# test = PicFolderPrep(
-#     "/path/to/pic/folder")
-# test.GetColorList()
