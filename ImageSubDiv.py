@@ -186,7 +186,6 @@ class ImageSubDiv:
               (len(picked_file_count)))
 
     # finally paste the pictures
-
     def PastePics(self, out_file="test_out.jpg"):
         index = list(range(len(self.block_colors)))
         # now we want to sort the index based on its picture
@@ -238,5 +237,3 @@ class ImageSubDiv:
         cv2.imwrite(out_file, new_image_np)
         print("\nPicture pasting done, saved at "+out_file)
         # new_image.save(out_file)
-
-
