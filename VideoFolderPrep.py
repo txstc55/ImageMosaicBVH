@@ -79,7 +79,3 @@ class VideoFolderPrep:
         folder = PicFolderPrep(self.save_folder_name)
         folder.GetColorList(info_name = info_name)
 
-
-# test = VideoFolderPrep("test_folder")
-# test.SaveFramesParallel(skip_frame=2, save_folder_name="out_pic")
-# test.GetFrameColors()

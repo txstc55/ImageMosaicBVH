@@ -54,6 +54,3 @@ class PrepVideo:
 
     # we will continue to use rgb
 
-
-# test = PrepVideo("test_video_folder/test.webm")
-# test.SaveFrames(skip = 15)
