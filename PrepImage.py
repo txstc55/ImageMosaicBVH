@@ -74,6 +74,8 @@ class PrepImage:
             im = im.resize((desired_size, desired_size), Image.LANCZOS)
             self.width = desired_size
             self.height = desired_size
+        elif (desired_size == -1):
+            pass
         else:
             # we want to resize the image to a reasonable small one
             # so that we dont work too hard on an image that will get small eventually
@@ -136,8 +138,3 @@ class PrepImage:
         except:
             return(-1, -1, -1)
 
-
-# if __name__ == "__main__":
-#     test = PrepImage("test.jpg")
-#     test.PreProcess(debug=True, save_path="test_out.jpg")
-#     print(test.GetColor())
