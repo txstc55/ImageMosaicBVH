@@ -15,7 +15,7 @@ from progress.bar import Bar
 # This class subdivides an image to smaller squares
 # based on user settings of largest block size and smallest block size
 # at the beginning, user can also choose to enlarge the picture so that
-# each square has larger pixel countsÎ
+# each square has larger pixel counts
 
 
 class ImageSubDiv:
