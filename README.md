@@ -104,7 +104,7 @@ Please choose from the following options:
 1. Prepare an image folder for generation, all images in subfolders will be included
 2. Prepare a video folder for generation, all videos in subfolders will be included
 3. Generate an image mosaic
-4. Exit
+0. Exit
 ```
 
 Here we input ***1*** to first analyze a picture folder
@@ -147,7 +147,7 @@ Please choose from the following options:
 1. Prepare an image folder for generation, all images in subfolders will be included
 2. Prepare a video folder for generation, all videos in subfolders will be included
 3. Generate an image mosaic
-4. Exit
+0. Exit
 ```
 
 This time, we want to choose ***3*** for generation
@@ -205,7 +205,7 @@ Please choose from the following options:
 1. Prepare an image folder for generation, all images in subfolders will be included
 2. Prepare a video folder for generation, all videos in subfolders will be included
 3. Generate an image mosaic
-4. Exit
+0. Exit
 ```
 
 Finally, enter ***0*** to exit the program
