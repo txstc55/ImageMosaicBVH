@@ -81,7 +81,7 @@ Once it starts to generate the image, it goes back to using single thread. This 
 
 Generating the color information is fairly easy since it is done by multithreading. Picking the corresponding picture is done with single thread since it is probability-based, but is also fairly fast.
 
-The slowest part is to paste the image. Oh boy, to generate this image it took me around 23 minutes in total (including pre-processing)
+The slowest part is to paste the image. Oh boy, to generate this image it took me around 23 minutes in total (including pre-processing), but this could also be because I have many large images inside my library.
 
 Why is it slow? Well because python's shared data is not that good. For all the shared data type, not only is slow, as f@#k, but also puts a limit on the size of file the pipe can transfer.
 
