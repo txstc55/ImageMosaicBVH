@@ -22,11 +22,15 @@ def convert_to_srgb(img):
     icc = img.info.get('icc_profile', '')
     if_changed = False
     if icc:
-        io_handle = io.BytesIO(icc)     # virtual file
-        src_profile = ImageCms.ImageCmsProfile(io_handle)
-        dst_profile = ImageCms.createProfile('sRGB')
-        img = ImageCms.profileToProfile(img, src_profile, dst_profile)
-        if_changed = True
+        try:
+            io_handle = io.BytesIO(icc)     # virtual file
+            src_profile = ImageCms.ImageCmsProfile(io_handle)
+            dst_profile = ImageCms.createProfile('sRGB')
+            img = ImageCms.profileToProfile(img, src_profile, dst_profile)
+            if_changed = True
+        except:
+            ## this happens when we cannot handle the color profile, fuck this
+            pass
     return img, if_changed
 
 
