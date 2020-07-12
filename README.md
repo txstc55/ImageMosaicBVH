@@ -17,6 +17,12 @@ There are a couple of libraries you need to install: CV2, which you can install 
 pip install opencv-python
 ```
 
+Numpy, just because
+
+```bash
+pip install numpy
+```
+
 Pillow, which is also used for image processing
 
 ```bash
