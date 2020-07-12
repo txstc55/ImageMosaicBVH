@@ -4,7 +4,7 @@ def import_or_install(package, package_name):
         __import__(package)
     except ImportError:
         print("%s not found, installing %s"%(package, package_name))
-        pip.main(['install', package])    
+        pip.main(['install', package_name])    
 
 import_or_install("progress", "progress")
 import_or_install("PIL", "Pillow")
