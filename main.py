@@ -1,4 +1,7 @@
-from pip._internal import main
+try:
+    from pip._internal import main
+except:
+    from pip import main
 def import_or_install(package, package_name):
     try:
         __import__(package)
