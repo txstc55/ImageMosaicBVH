@@ -44,7 +44,7 @@ Just do this:
 python main.py
 ```
 
-There is an interface that should guide you through all the trouble to generate an image
+There is an interface that should guide you through all the trouble to generate an image. A typical run will be attached at the end for you to go through.
 
 Note that this project is done with python 3 so maybe it has things that python 2 does not support. If you are still using python 2, JUST GO GET PYTHON 3, WHAT IS SO HARD ABOUT IT?
 
@@ -93,3 +93,119 @@ Essentially, this is a lot faster than the very first version I wrote. If you ha
 I wanted to compress a whole porn into one image, that's why.
 
 And now I can.
+
+## A typical run
+
+All the ***italic bold characters*** are the input
+
+```
+Welcome to use this library. This library aims to produce an image mosaic that preserves detail and tries to use all the images provided. Good luck have fun!
+Please choose from the following options:
+1. Prepare an image folder for generation, all images in subfolders will be included
+2. Prepare a video folder for generation, all videos in subfolders will be included
+3. Generate an image mosaic
+4. Exit
+```
+
+Here we input ***1*** to first analyze a picture folder
+```
+You have chosen to prepare a picture folder. Pictures in this folder will be analyzed for color information, which can be used later on for assembling an image.
+Please enter the picture folder path, all subfolders will be included for processing, press enter to go back to main menu.
+```
+
+Now we input the folder name, for this example we use the photo library: ***/Users/MyUserName/Pictures/Photos Library.photoslibrary/originals***
+```
+Pleae enter a name for json file. This json file contains necessary color information for assembling the final image. Press enter for default name: color_info.json.
+```
+
+Then we pick a name for the output json name, after that, pre process is ran on multi thread, here we use ***my_pictures.json***
+```
+Start work on 16 process
+process 13 finished --- 59.92822599411011 seconds ---
+process 15 finished --- 60.414633989334106 seconds ---
+process 0 finished --- 63.85002422332764 seconds ---
+process 9 finished --- 64.32532787322998 seconds ---
+process 3 finished --- 65.41515588760376 seconds ---
+process 5 finished --- 65.81360101699829 seconds ---
+process 12 finished --- 67.81327104568481 seconds ---
+process 6 finished --- 68.14862823486328 seconds ---
+process 14 finished --- 68.49922609329224 seconds ---
+process 2 finished --- 68.5216977596283 seconds ---
+process 1 finished --- 68.62598705291748 seconds ---
+process 10 finished --- 69.74604916572571 seconds ---
+process 7 finished --- 69.77347493171692 seconds ---
+process 8 finished --- 70.35482096672058 seconds ---
+process 4 finished --- 71.23905110359192 seconds ---
+process 11 finished --- 72.45990085601807 seconds ---
+There are 1715 photos and 1689 unique colors
+Color information saved in my_pictures.json
+```
+
+After that, you will be back at the main menu
+```
+Please choose from the following options:
+1. Prepare an image folder for generation, all images in subfolders will be included
+2. Prepare a video folder for generation, all videos in subfolders will be included
+3. Generate an image mosaic
+4. Exit
+```
+
+This time, we want to choose ***3*** for generation
+```
+You have chosen to generate an image mosaic. At this step you need color info generated from a picture folder or video folder to proceed.
+Please enter a picture for generating image mosaic. Press enter to go back to main menu.
+```
+
+Input the picture you want to use, here we use ***test.jpg***
+```
+If you want to enlarge the picture, please enter a positive integer. Press enter for default of 1(do not enlarge it).
+```
+
+For this run, we do not want to change the image size so input ***1***
+```
+For every block in the final image, it shall be within a range of size you prefer. Each block will be subdivided into 4 smaller blocks evenly if necessary for better detail.
+
+Please enter the largest block size.
+```
+
+We will set ***200*** for the largest block size
+```
+Please enter the smallest block size.
+```
+
+We will set ***100*** for the smallest block size
+
+```
+The frequency of how a block is divided is determined by the gradient value(based on image) and also an alpha value. The larger alpha, the more frequent blocks will be divided.
+Please enter an alpha value between 0 and 1 exclusive.
+```
+
+Here, we choose ***0.5*** for the alpha value. The larger alpha is, the more subdivision will happen.
+
+```
+Width 4600, height 6000
+There are 2619 blocks and 1297 different colors
+Now the image is subdivided into color blocks, we will need a color info json to proceed.
+
+Please enter the color info json file name to proceed. Press enter to go back to main menu
+```
+
+Previously we have saved the json file ***my_pictures.json***, we will use it here
+```
+There are 1689 unique colors and 1712 unique pictures
+Picking pictures |################################| 2619/2619
+Picture picking done, 1105 different pictures picked
+Please enter the output file name. Press enter for default out.jpg.
+```
+We will save to ***out_test.jpg***
+```
+Pasting pictures |################################| 2619/2619
+Picture pasting done, saved at out_test.jpg
+Please choose from the following options:
+1. Prepare an image folder for generation, all images in subfolders will be included
+2. Prepare a video folder for generation, all videos in subfolders will be included
+3. Generate an image mosaic
+4. Exit
+```
+
+Finally, enter ***0*** to exit the program
