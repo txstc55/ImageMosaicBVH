@@ -11,7 +11,9 @@ This alone will make the image ugly since we don't always pick the best picture 
 
 ## Prerequisite
 
-There are a couple of libraries you need to install: CV2, which you can install by conda or pip:
+There are a couple of libraries you need to install manually, or rely on main.py to install for you(a install will be invoked at the beginning of script if the library is not found):
+
+CV2, for image processing
 
 ```bash
 pip install opencv-python
