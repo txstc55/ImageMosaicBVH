@@ -74,3 +74,8 @@ Why is it slow? Well because python's shared data is not that good. For all the 
 I tried to do pasting work on multithreading, then merge the photo using a shared queue, and whenever the queue is not empty, the master thread takes the object and do a merge. But like I mentioned, the size limit is just ruining everything, and when the imaage get larger, the get() operation just takes forever and beats the purpose of multithreading.
 
 Essentially, this is a lot faster than the very first version I wrote. If you have better idea on speeding it up, don't hesitate and just open an issue or a pull request.
+
+## But why?
+I wanted to compress a whole porn into one image, that's why.
+
+And now I can.
