@@ -79,6 +79,8 @@ Once it starts to generate the image, it goes back to using single thread. This 
 
 ## For those who cares about the performance
 
+Edit: As of July 13th, I realized that the main reason my testing was slow was because the images I used were quite large, not the image for mosaic, but the sub images. Normally if you have smaller images this is not a problem.
+
 Generating the color information is fairly easy since it is done by multithreading. Picking the corresponding picture is done with single thread since it is probability-based, but is also fairly fast.
 
 The slowest part is to paste the image. Oh boy, to generate this image it took me around 23 minutes in total (including pre-processing), but this could also be because I have many large images inside my library.
